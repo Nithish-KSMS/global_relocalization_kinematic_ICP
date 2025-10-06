@@ -2,3 +2,4 @@ build/
 install/
 log/
 ros2_bag/
+RTAB_Map_PCD/cloud.pcd
