@@ -11,14 +11,15 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(PCL REQUIRED)
 find_package(pcl_conversions REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(pcl_ros REQUIRED)
 
 # include PCL directories
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
-
-# include 'include' folder
-# include_directories(include)
 
 # create the executable
 add_executable(global_relocalization src/globalLocalize.cpp)
@@ -34,6 +35,10 @@ rclcpp
 sensor_msgs
 PCL
 pcl_conversions
+geometry_msgs
+tf2
+tf2_ros
+pcl_ros
 )
 
 target_link_libraries(global_relocalization ${PCL_LIBRARIES})
