@@ -9,12 +9,14 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(builtin_interfaces REQUIRED)
 find_package(PCL REQUIRED)
 find_package(pcl_conversions REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(pcl_ros REQUIRED)
+find_package(nav_msgs REQUIRED)
 
 # include PCL directories
 include_directories(${PCL_INCLUDE_DIRS})
@@ -23,6 +25,7 @@ add_definitions(${PCL_DEFINITIONS})
 
 # create the executable
 add_executable(global_relocalization src/globalLocalize.cpp)
+add_executable(localization_bridge src/localization_bridge.cpp)
 
 target_include_directories(global_relocalization
   PUBLIC
@@ -33,6 +36,7 @@ target_include_directories(global_relocalization
 ament_target_dependencies(global_relocalization
 rclcpp
 sensor_msgs
+builtin_interfaces
 PCL
 pcl_conversions
 geometry_msgs
@@ -41,11 +45,23 @@ tf2_ros
 pcl_ros
 )
 
+ament_target_dependencies(localization_bridge
+geometry_msgs
+nav_msgs
+rclcpp
+tf2_ros
+)
+
 target_link_libraries(global_relocalization ${PCL_LIBRARIES})
 
 # install the executable
 install(TARGETS 
 global_relocalization
+DESTINATION lib/${PROJECT_NAME}
+)
+
+install(TARGETS
+localization_bridge
 DESTINATION lib/${PROJECT_NAME}
 )
 
