@@ -11,7 +11,7 @@ GlobalRelocalization::GlobalRelocalization() : Node("global_relocalization")
     pcd_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("/global_map", 10); 
     pcd_publish_timer_ = this->create_wall_timer(std::chrono::milliseconds(100), std::bind(&GlobalRelocalization::pcd_publish_timercallback, this));
     
-    pointcloud_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("/livox/lidar", 10, std::bind(&GlobalRelocalization::pointcloudCallback, this, std::placeholders::_1));
+    pointcloud_subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>("/dummy/livox/lidar", 10, std::bind(&GlobalRelocalization::pointcloudCallback, this, std::placeholders::_1));
 
     // tf2::Duration cache_time = tf2::Duration(20);
     // tf_buffer_ = std::make_unique<tf2_ros::Buffer>(this->get_clock(), cache_time);
