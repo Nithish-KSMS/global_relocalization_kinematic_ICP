@@ -26,6 +26,7 @@ add_definitions(${PCL_DEFINITIONS})
 # create the executable
 add_executable(global_relocalization src/globalLocalize.cpp)
 add_executable(localization_bridge src/localization_bridge.cpp)
+add_executable(pointcloud_relay src/pointcloud_relay.cpp)
 
 target_include_directories(global_relocalization
   PUBLIC
@@ -52,6 +53,11 @@ rclcpp
 tf2_ros
 )
 
+ament_target_dependencies(pointcloud_relay
+sensor_msgs
+rclcpp
+)
+
 target_link_libraries(global_relocalization ${PCL_LIBRARIES})
 
 # install the executable
@@ -64,6 +70,10 @@ install(TARGETS
 localization_bridge
 DESTINATION lib/${PROJECT_NAME}
 )
+
+install(TARGETS
+pointcloud_relay
+DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY include/
 DESTINATION include/

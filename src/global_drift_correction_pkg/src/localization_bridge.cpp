@@ -15,6 +15,7 @@ class LocalizationBridge : public rclcpp::Node
     public:
         LocalizationBridge():Node("kinematic_icp_localization_bridge")
         {
+            RCLCPP_INFO(this->get_logger(), "Starting LocalizationBridge Node");
             kinematic_odom_subscriber_ = this->create_subscription<nav_msgs::msg::Odometry>("/kinematic_icp/lidar_odometry", \
                                                 10, std::bind(&LocalizationBridge::kinematic_tf_callback, this, std::placeholders::_1));
 
