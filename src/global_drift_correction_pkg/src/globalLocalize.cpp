@@ -4,7 +4,7 @@
 
 GlobalRelocalization::GlobalRelocalization() : Node("global_relocalization")
 {
-    RCLCPP_INFO(this->get_logger() ,"Starting global relocalization for drift correction");
+    RCLCPP_INFO(this->get_logger() ,"Starting Global Relocalization Node");
 
     cloudGlobalLoad();
     
